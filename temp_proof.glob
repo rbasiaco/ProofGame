@@ -1,0 +1,7 @@
+DIGEST 5b713b4010a09a9113d304f23f75329c
+Ftemp_proof
+prf 9:15 <> problem
+binder 26:26 <> P:1
+R37:40 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R36:36 temp_proof <> P:1 var
+R41:41 temp_proof <> P:1 var

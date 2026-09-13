@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Problems | ProofGame</title>
+    </head>
+
+    <body>
+
+        <h1>Problems</h1>
+
+        <p>Choose a proof problem to solve.</p>
+
+        {% for id, problem in problems.items() %}
+
+    <p>
+        <a href="/problem/{{ id }}">
+            Problem {{ id }}: {{ problem.title }}
+        </a>
+
+        <span id="check-{{ id }}"></span>
+    </p>
+
+{% endfor %}
+
+        <a href="/">
+            Back Home
+        </a>
+<script>
+    {% for id, problem in problems.items() %}
+
+        if (
+            localStorage.getItem(
+                "problem_{{ id }}_completed"
+            ) === "true"
+        ) {
+            document.getElementById(
+                "check-{{ id }}"
+            ).innerText = "✓";
+        }
+
+    {% endfor %}
+</script>
+    </body>
+
+</html>

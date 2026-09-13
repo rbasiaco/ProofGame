@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Problem 1</title>
+    </head>
+
+    <body>
+        <h1>Problem 1</h1>
+
+        <p>Prove that if P is true, then P is true.</p>
+
+        <textarea id="proofInput" rows="12" cols="60"></textarea>
+
+        <br>
+
+        <button onclick="submitProof()">Submit Proof</button>
+
+        <p id="result"></p>
+
+        <script>
+            
+    async function submitProof() {
+        const proof = document.getElementById("proofInput").value;
+
+        const response = await fetch("/check-proof", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                proof: proof
+            })
+        });
+
+        const result = await response.json();
+
+        document.getElementById("result").innerText = result.message;
+    }
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,7 @@
+DIGEST e24625b7b4a87bc6584e2715f09daa45
+Ftest
+prf 8:18 <> first_proof
+binder 29:29 <> P:1
+R40:43 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R39:39 test <> P:1 var
+R44:44 test <> P:1 var

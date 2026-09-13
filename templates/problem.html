@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>{{ problem.title }} | ProofGame</title>
+    </head>
+
+    <body>
+
+        <h1>{{ problem.title }}</h1>
+
+        <h3>Problem Statement</h3>
+        <p>{{ problem.statement }}</p>
+
+        <h3>Rocq Statement</h3>
+
+        <pre><code>Theorem problem : {{ problem.theorem }}.
+
+Proof.
+
+    (* Your proof goes here *)
+
+Qed.</code></pre>
+
+        <textarea
+            id="proofInput"
+            rows="12"
+            cols="60"
+        ></textarea>
+
+        <br>
+
+        <button onclick="submitProof()">
+            Submit Proof
+        </button>
+
+        <p id="result"></p>
+
+        <br>
+
+        <a href="/problems">
+            Back to Problems
+        </a>
+
+        <script>
+            async function submitProof() {
+
+                const proof =
+                    document.getElementById("proofInput").value;
+
+                const response = await fetch(
+                    "/check-proof/{{ problem_id }}",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            proof: proof
+                        })
+                    }
+                );
+
+                const result = await response.json();
+
+document.getElementById("result").innerText =
+    result.message;
+
+if (result.success) {
+    localStorage.setItem(
+        "problem_{{ problem_id }}_completed",
+        "true"
+    );
+}
+            }
+        </script>
+
+    </body>
+</html>
