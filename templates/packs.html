@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Packs | ProofGame</title>
+    </head>
+
+    <body>
+
+        <h1>Proof Packs</h1>
+
+        <p>Choose a collection of problems.</p>
+
+        {% for id, pack in packs.items() %}
+
+            <div>
+
+                <h2>
+                    <a href="/pack/{{ id }}">
+                        {{ pack.title }}
+                    </a>
+                </h2>
+
+                <p>{{ pack.description }}</p>
+
+                <p>
+                    Level: {{ pack.level }}
+                </p>
+
+                <p id="progress-{{ id }}"></p>
+
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+        <a href="/">
+            Back Home
+        </a>
+
+
+        <script>
+
+            {% for pack_id, pack in packs.items() %}
+
+                let completed_{{ loop.index }} = 0;
+                let total_{{ loop.index }} = 0;
+
+                {% for problem_id, problem in problems.items() %}
+
+                    {% if problem.pack == pack_id %}
+
+                        total_{{ loop.index }}++;
+
+                        if (
+                            localStorage.getItem(
+                                "problem_{{ problem_id }}_completed"
+                            ) === "true"
+                        ) {
+                            completed_{{ loop.index }}++;
+                        }
+
+                    {% endif %}
+
+                {% endfor %}
+
+                document.getElementById(
+                    "progress-{{ pack_id }}"
+                ).innerText =
+                    completed_{{ loop.index }} +
+                    " / " +
+                    total_{{ loop.index }} +
+                    " completed";
+
+            {% endfor %}
+
+        </script>
+
+    </body>
+
+</html>

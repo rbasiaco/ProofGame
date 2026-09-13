@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>{{ pack.title }} | ProofGame</title>
+    </head>
+
+    <body>
+
+        <h1>{{ pack.title }}</h1>
+
+        <p>{{ pack.description }}</p>
+
+        <p>
+            Difficulty: {{ pack.level }}
+        </p>
+
+        <hr>
+
+        {% if problems %}
+
+            {% for id, problem in problems.items() %}
+
+                <p>
+
+                    <a href="/problem/{{ id }}">
+                        Problem {{ id }}: {{ problem.title }}
+                    </a>
+
+                    <span id="check-{{ id }}"></span>
+
+                </p>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>
+                No problems have been added to this pack yet.
+            </p>
+
+        {% endif %}
+
+        <br>
+
+        <a href="/packs">
+            Back to Packs
+        </a>
+
+
+        <script>
+
+            {% for id, problem in problems.items() %}
+
+                if (
+                    localStorage.getItem(
+                        "problem_{{ id }}_completed"
+                    ) === "true"
+                ) {
+                    document.getElementById(
+                        "check-{{ id }}"
+                    ).innerText = "✓";
+                }
+
+            {% endfor %}
+
+        </script>
+
+    </body>
+
+</html>
