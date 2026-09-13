@@ -1,0 +1,17 @@
+# Rocq compiled files
+*.vo
+*.vos
+*.vok
+*.glob
+*.aux
+
+# Temporary proof file
+temp_proof.v
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.venv/
