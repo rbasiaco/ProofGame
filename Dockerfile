@@ -14,4 +14,8 @@ RUN pip3 install --break-system-packages --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "main:app"]
+RUN chown -R rocq:rocq /app
+
+USER rocq
+
+CMD ["gunicorn", "main:app"]
